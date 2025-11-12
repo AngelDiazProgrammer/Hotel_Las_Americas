@@ -1,0 +1,17 @@
+﻿services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: hotel-sqlserver
+    environment:
+      SA_PASSWORD: "HotelLasAmericas2024!"
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: "Express"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+      - ./sql-scripts:/docker-entrypoint-initdb.d
+    restart: unless-stopped
+
+volumes:
+  sqlserver_data:
