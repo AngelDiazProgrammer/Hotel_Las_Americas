@@ -16,10 +16,28 @@
     <name>01-presentation</name>
     
     <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.miproyecto</groupId>
             <artifactId>application</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        
+        <!-- Spring Boot Starter Web (para APIs y vistas) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        
+        <!-- Thymeleaf para vistas HTML -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
         
         <!-- Spring Boot Starter Test -->
