@@ -1,0 +1,293 @@
+/* main.css - Estilos adaptativos para contenido principal con navbar */
+
+/* RESET Y ESTILOS BASE */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden; /* Evita scroll en body */
+    font-family: Arial, sans-serif;
+}
+
+/* CONTENEDOR PRINCIPAL */
+.main-container {
+    display: flex;
+    height: 100vh; /* altura completa de viewport */
+    width: 100vw;
+    overflow: hidden;
+}
+
+/* NAVBAR (FIJADA A LA IZQUIERDA) */
+#navbar {
+    flex: 0 0 120px;
+    height: 100vh;
+    position: relative;
+    z-index: 1000;
+}
+
+/* CONTENIDO PRINCIPAL */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #f8f9fa;
+}
+
+/* CONTENEDOR DE CONTENIDO */
+.content-container {
+    margin: none;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* distribuye contenido */
+    padding: 20px;
+    overflow: hidden; /* eliminar scroll */
+}
+
+/* LOADER */
+.loader-container {
+    position: fixed;
+    top: 0;
+    left: 120px;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1001;
+}
+
+.loader-content {
+    text-align: center;
+    padding: 40px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.loader-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #D10000;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* VISTA DE APLICACIÓN */
+.app-container {
+    width: 100%;
+    flex: 1;
+    padding: 20px;
+}
+
+/* CONTENIDO DEL HOME */
+.home-container {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow-y: auto; /* scroll solo si es necesario */
+}
+
+/* CONTENEDOR FLUIDO */
+.container-fluid {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+/* Títulos y textos */
+h1.display-4 {
+    color: #750000;
+    font-weight: 700;
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+}
+
+.lead {
+    color: #666;
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+h4 {
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* CARDS */
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-bottom: 20px;
+    background-color: white;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.card-header {
+    background-color: #750000;
+    color: white;
+    border-radius: 10px 10px 0 0 !important;
+    font-weight: 600;
+    padding: 15px 20px;
+    border: none;
+}
+
+.card-body {
+    padding: 20px;
+    flex: 1;
+}
+
+/* Badges */
+.badge {
+    font-size: 0.85rem;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+/* Lista de arquitectura */
+.list-unstyled {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.list-unstyled li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.list-unstyled li:last-child {
+    border-bottom: none;
+}
+
+.list-unstyled li strong {
+    color: #333;
+    font-weight: 600;
+}
+
+/* Tecnologías badges */
+.d-flex.flex-wrap.gap-2 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    font-size: 0.85rem;
+}
+
+/* Margenes y padding específicos */
+.py-4 {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+}
+
+.mt-4 {
+    margin-top: 1.5rem !important;
+}
+
+.mt-5 {
+    margin-top: 2.5rem !important;
+}
+
+.mb-3 {
+    margin-bottom: 1rem !important;
+}
+
+/* Ajustes para scrollbar interno */
+.home-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.home-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.home-container::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+.home-container::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+    .row.align-items-center {
+        flex-direction: column;
+    }
+
+    .col-md-6 {
+        width: 100%;
+    }
+
+    h1.display-4 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        flex-direction: column;
+    }
+
+    #navbar {
+        flex: 0 0 70px;
+        width: 100%;
+        height: 70px;
+    }
+
+    .main-content {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .loader-container {
+        left: 0;
+    }
+
+    h1.display-4 {
+        font-size: 1.7rem;
+    }
+
+    .lead {
+        font-size: 1rem;
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+}

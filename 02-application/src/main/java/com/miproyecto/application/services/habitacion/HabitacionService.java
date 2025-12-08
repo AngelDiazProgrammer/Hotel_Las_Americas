@@ -1,6 +1,8 @@
 package com.miproyecto.application.services.habitacion;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.miproyecto.domain.entities.habitacion.Habitacion;
 import com.miproyecto.infrastructure.repositories.habitacion.IHabitacionRepository;
@@ -16,6 +18,11 @@ public class HabitacionService {
     public List<Habitacion> obtenerTodasLasHabitaciones() {
         return habitacionRepository.findAll();
     }
+
+public Page<Habitacion> obtenerHabitacionesPaginadas(Pageable pageable) {
+    return habitacionRepository.findAll(pageable);
+}
+
     
     public Optional<Habitacion> obtenerHabitacionPorId(Integer id) {
         return habitacionRepository.findById(id);
