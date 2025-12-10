@@ -14,8 +14,16 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
     "com.miproyecto.infrastructure",
     "com.miproyecto.shared"
 })
-@EnableJpaRepositories(basePackages = "com.miproyecto.infrastructure.repositories.habitacion")
-@EntityScan(basePackages = "com.miproyecto.domain.entities.habitacion")
+// Agrega BOTH paquetes de repositorios
+@EnableJpaRepositories(basePackages = {
+    "com.miproyecto.infrastructure.repositories.habitacion",
+    "com.miproyecto.infrastructure.repositories.usuario"
+})
+// Agrega BOTH paquetes de entidades
+@EntityScan(basePackages = {
+    "com.miproyecto.domain.entities.habitacion",
+    "com.miproyecto.domain.entities.usuario"
+})
 public class HotelApplication {
     public static void main(String[] args) {
         SpringApplication.run(HotelApplication.class, args);

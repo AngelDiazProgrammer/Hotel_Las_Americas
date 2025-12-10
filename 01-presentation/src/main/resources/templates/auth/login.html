@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - Hotel Las Américas</title>
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS Personalizado -->
+    <link rel="stylesheet" th:href="@{/css/auth/login.css}">
+    
+</head>
+<body>
+    <!-- Contenedor principal -->
+    <div class="login-wrapper">
+        
+        <!-- Sección izquierda con información del hotel -->
+        <div class="login-info-panel">
+            <div class="info-content">
+                <div class="hotel-logo-large">
+                    <i class="fas fa-hotel"></i>
+                </div>
+                <h1 class="hotel-title-large">Hotel Las Américas</h1>
+                <p class="hotel-subtitle-large">Sistema de Gestión Hotelera</p>
+                
+                <div class="hotel-features">
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Gestión de reservas</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Control de inventarios</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Reportes en tiempo real</span>
+                    </div>
+                </div>
+                
+                <div class="hotel-contact">
+                    <p><i class="fas fa-phone"></i> +57 1 123 4567</p>
+                    <p><i class="fas fa-envelope"></i> info@hotelamericas.com</p>
+                </div>
+                
+                <div class="version-display">
+                    <span class="version">v1.5.2</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sección derecha con formulario -->
+        <div class="login-form-panel">
+            <div class="form-container">
+                <!-- Header del formulario -->
+                <div class="form-header">
+                    <h2><i class="fas fa-sign-in-alt me-2"></i>Acceso al Sistema</h2>
+                    <p class="form-subtitle">Ingrese sus credenciales para continuar</p>
+                </div>
+                
+                <!-- Formulario de login -->
+<!-- Formulario de login -->
+<form class="login-form" th:action="@{/auth/login}" method="post">
+    
+    <!-- Mensaje de error -->
+    <div th:if="${error}" class="alert alert-danger">
+        <i class="fas fa-exclamation-circle me-2"></i>
+        <span th:text="${error}">Credenciales incorrectas</span>
+    </div>
+    
+    <!-- Campo de Usuario -->
+    <div class="form-group mb-3">
+        <label for="nombreUsuario" class="form-label">
+            <i class="fas fa-user me-1"></i> Usuario
+        </label>
+        <div class="input-group">
+            <span class="input-group-text">
+                <i class="fas fa-user"></i>
+            </span>
+            <input type="text" 
+                   id="nombreUsuario" 
+                   name="nombreUsuario"
+                   class="form-control"
+                   placeholder="Ingrese su usuario"
+                   required
+                   autocomplete="username"
+                   autofocus>
+        </div>
+    </div>
+    
+    <!-- Campo de Contraseña -->
+    <div class="form-group mb-4">
+        <label for="contrasena" class="form-label">
+            <i class="fas fa-key me-1"></i> Contraseña
+        </label>
+        <div class="input-group">
+            <span class="input-group-text">
+                <i class="fas fa-lock"></i>
+            </span>
+            <input type="password" 
+                   id="contrasena" 
+                   name="contrasena"
+                   class="form-control"
+                   placeholder="Ingrese su contraseña"
+                   required
+                   autocomplete="current-password">
+        </div>
+    </div>
+    
+    <!-- Opciones adicionales -->
+    <div class="form-options mb-4">
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="rememberMe" name="remember-me">
+            <label class="form-check-label" for="rememberMe">
+                Recordar sesión
+            </label>
+        </div>
+    </div>
+    
+    <!-- Botón de Login -->
+    <button type="submit" class="btn btn-primary w-100 py-3 mb-3" id="loginBtn">
+        <i class="fas fa-sign-in-alt me-2"></i>
+        <span id="btnText">Iniciar Sesión</span>
+        <span id="btnLoading" class="d-none">
+            <span class="spinner-border spinner-border-sm me-2"></span>
+            Verificando...
+        </span>
+    </button>
+    
+    <!-- Enlaces adicionales -->
+    <div class="form-links text-center">
+        <a href="#" class="text-decoration-none d-block mb-2">
+            <i class="fas fa-key me-1"></i>
+            ¿Olvidó su contraseña?
+        </a>
+        <a href="#" class="text-decoration-none d-block">
+            <i class="fas fa-user-plus me-1"></i>
+            Solicitar acceso
+        </a>
+    </div>
+</form>
+                
+                <!-- Footer del formulario -->
+                <div class="form-footer">
+                    <p>© 2024 Hotel Las Américas</p>
+                    <p class="disclaimer">Uso exclusivo para personal autorizado</p>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+    
+    <!-- Partículas decorativas en el fondo -->
+    <div class="bg-particles" id="particles"></div>
+    
+    <!-- JavaScript -->
+    <script th:src="@{/js/auth/login-effects.js}"></script>
+    
+</body>
+</html>
