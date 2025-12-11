@@ -25,14 +25,6 @@ public class IndexController {
         return "index";
     }
 
-@GetMapping("/habitaciones")
-public String habitaciones(Model model) {
-    List<Habitacion> habitaciones = habitacionService.obtenerTodasLasHabitaciones();
-    model.addAttribute("pageTitle", "Habitaciones");
-    model.addAttribute("habitaciones", habitaciones);
-    model.addAttribute("totalHabitaciones", habitaciones.size());
-    return "habitaciones/habitaciones";
-}
 
     @GetMapping("/reservas")
     public String reservas(Model model) {

@@ -1,0 +1,123 @@
+/* navbar.css - Estilos para la navbar lateral de 120px */
+
+/* RESET PARA NAVBAR */
+.navbar {
+    background: linear-gradient(to bottom, #750000, #D10000);
+    color: #FFE6E6;
+    width: 200px;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden; /* Sin scroll en navbar */
+}
+
+.navbar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: #FF2E2E;
+}
+
+/* LOGO */
+.navbar-logo {
+    font-size: 14px;
+    font-weight: 700;
+    padding: 15px 5px;
+    background-color: rgba(117, 0, 0, 0.9);
+    color: #FFE6E6;
+    text-align: center;
+    border-bottom: 2px solid #FF2E2E;
+    margin: 0;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    flex-shrink: 0; /* No se encoje */
+}
+
+/* MENÚ */
+.navbar-links {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex: 1; /* Ocupa espacio disponible */
+    overflow-y: auto; /* Scroll solo en menú si es necesario */
+    overflow-x: hidden;
+}
+
+.navbar-links li {
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+
+.navbar-links a {
+    color: #FFE6E6;
+    text-decoration: none;
+    padding: 15px 5px;
+    font-size: 12px;
+    font-weight: 600;
+    display: block;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(255, 230, 230, 0.1);
+    width: 100%;
+    text-align: center;
+    line-height: 1.4;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.navbar-links a:hover {
+    background-color: #FF2E2E;
+    color: white;
+}
+
+.navbar-links a.active {
+    background-color: #D10000;
+    color: white;
+    border-left: 3px solid #FF2E2E;
+}
+
+/* LOGOUT (al final) */
+.navbar-links li:last-child {
+    margin-top: auto;
+    border-top: 2px solid #FF2E2E;
+}
+
+.navbar-links li:last-child a {
+    background-color: rgba(117, 0, 0, 0.8);
+    font-weight: 700;
+    font-size: 11px;
+}
+
+.navbar-links li:last-child a:hover {
+    background-color: #FF2E2E;
+}
+
+/* Scrollbar para navbar (opcional) */
+.navbar-links::-webkit-scrollbar {
+    width: 4px;
+}
+
+.navbar-links::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.navbar-links::-webkit-scrollbar-thumb {
+    background: rgba(255, 46, 46, 0.5);
+    border-radius: 2px;
+}
+
+.navbar-links::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 46, 46, 0.7);
+}
