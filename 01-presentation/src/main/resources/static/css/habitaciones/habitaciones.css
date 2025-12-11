@@ -131,3 +131,77 @@
         margin-bottom: 1rem;
     }
 }
+
+/* Estilos adicionales para habitaciones.css */
+
+/* Botones de acciones */
+.btn-group-sm .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+
+/* Badges de estado */
+.badge.bg-success { background: #198754 !important; }
+.badge.bg-danger { background: #dc3545 !important; }
+.badge.bg-warning { background: #ffc107 !important; color: #000; }
+
+/* Hover en filas de tabla */
+.table-hover tbody tr:hover {
+    background-color: rgba(255, 46, 46, 0.05) !important;
+}
+
+/* Modal headers */
+.modal-header.bg-success { background: var(--color-dark) !important; }
+.modal-header.bg-primary { background: var(--color-main) !important; }
+.modal-header.bg-info { background: var(--color-darker) !important; }
+
+/* Formularios en modales */
+.modal-body .form-label {
+    font-weight: 600;
+    color: var(--color-darker);
+}
+
+.modal-body .form-control:focus,
+.modal-body .form-select:focus {
+    border-color: var(--color-main);
+    box-shadow: 0 0 0 0.25rem rgba(255, 46, 46, 0.25);
+}
+
+/* Responsividad para modales */
+@media (max-width: 768px) {
+    .modal-dialog.modal-lg {
+        margin: 0.5rem;
+        max-width: calc(100% - 1rem);
+    }
+    
+    .modal-body .row.g-3 {
+        gap: 0.5rem !important;
+    }
+}
+
+/* Botón flotante para móviles */
+@media (max-width: 576px) {
+    #habitaciones-container .btn-success {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+    #habitaciones-container .btn-success i {
+        font-size: 1.5rem;
+        margin: 0;
+    }
+    
+    #habitaciones-container .btn-success span {
+        display: none;
+    }
+}
