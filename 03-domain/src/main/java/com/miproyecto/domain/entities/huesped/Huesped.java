@@ -18,13 +18,13 @@ public class Huesped {
     private Integer id;
 
     @Column(name = "nombres", nullable = false)
-    private String nombres;
+    private String nombre;
 
     @Column(name = "apellidos", nullable = false)
-    private String apellidos;
+    private String apellido;
 
     @Column(name = "id_tipo_documento", nullable = false)
-    private Integer id_tipo_documento;
+    private Integer idTipoDocumento;
 
     @Column(name = "documento", nullable = false)
     private String documento;
@@ -39,8 +39,8 @@ public class Huesped {
     private String direccion;
 
     @Column(name = "id_estado_huesped")
-    private Integer id_estado_huesped;
+    private Integer idEstadoHuesped;
 
     @Column(name = "fecha_registro")
-    private LocalDateTime fecha_registro;
+    private LocalDateTime fechaRegistro;
 }

@@ -21,6 +21,11 @@ public class HuespedService {
 
     @Transactional
     public Huesped guardarHuesped(Huesped huesped) {
+
+        if (huespedRepository.existsByDocumento(huesped.getDocumento())) {
+            throw new RuntimeException("Ya existe un huésped con ese documento");
+        }
+
         return huespedRepository.save(huesped);
     }
 
@@ -39,14 +44,14 @@ public class HuespedService {
     public Huesped editarHuesped(Integer id, Huesped huespedActualizado) {
         return huespedRepository.findById(id)
                 .map(huesped -> {
-                    huesped.setNombres(huespedActualizado.getNombres());
-                    huesped.setApellidos(huespedActualizado.getApellidos());
-                    huesped.setId_tipo_documento(huespedActualizado.getId_tipo_documento());
+                    huesped.setNombre(huespedActualizado.getNombre());
+                    huesped.setApellido(huespedActualizado.getApellido());
+                    huesped.setIdTipoDocumento(huespedActualizado.getIdTipoDocumento());
                     huesped.setDocumento(huespedActualizado.getDocumento());
                     huesped.setEmail(huespedActualizado.getEmail());
                     huesped.setTelefono(huespedActualizado.getTelefono());
                     huesped.setDireccion(huespedActualizado.getDireccion());
-                    huesped.setId_estado_huesped(huespedActualizado.getId_estado_huesped());
+                    huesped.setIdEstadoHuesped(huespedActualizado.getIdEstadoHuesped());
                     return huespedRepository.save(huesped);
                 })
                 .orElseThrow(() -> new EntityNotFoundException("Huesped no encontrado con ID: " + id));

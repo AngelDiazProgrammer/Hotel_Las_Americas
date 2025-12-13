@@ -57,7 +57,7 @@ async function cargarComponente(nombreComponente, page = 0, size = 10) {
             url = `/vistas/componentes/${nombreComponente}`;
         }
         else if (nombreComponente === 'huespedes') {
-            // Para habitaciones usa la ruta con /vistas/
+            // Para huespedes usa la ruta con /vistas/
             url = `/vistas/componentes/${nombreComponente}`;
         }
 
@@ -73,6 +73,7 @@ async function cargarComponente(nombreComponente, page = 0, size = 10) {
             const queryString = params.toString();
             if (queryString) url += '?' + queryString;
         }
+
 
              if (nombreComponente === 'huespedes') {
                     const params = new URLSearchParams();
@@ -205,6 +206,20 @@ function ejecutarScriptsComponente(nombreComponente) {
                 cargarScriptHabitaciones();
             }
             break;
+        case 'huespedes':
+                    // Inicializar módulo de habitaciones si existe
+                    if (typeof inicializarHuespedes === 'function') {
+                        setTimeout(() => {
+                            inicializarHuespedes();
+                            console.log('✅ Script de huespedes ejecutado');
+                        }, 100);
+                    } else {
+                        console.warn('⚠️ Función inicializarHabitaciones no disponible');
+
+                        // Cargar script dinámicamente si no está disponible
+                        cargarScriptHuespedes();
+                    }
+                    break;
             
         case 'dashboard':
             console.log('📊 Dashboard cargado - sin scripts adicionales');
@@ -244,6 +259,35 @@ function cargarScriptHabitaciones() {
         console.error('❌ Error cargando script de habitaciones:', error);
     };
     
+    document.head.appendChild(script);
+}
+
+function cargarScriptHuespedes() {
+    // Verificar si ya está cargado
+    if (window.huespedesScriptCargado) {
+        console.log('✅ Script de huespedes ya cargado');
+        return;
+    }
+
+    console.log('📦 Cargando script de huespedes...');
+
+    // Crear script element
+    const script = document.createElement('script');
+    script.src = '/js/huespedes.js';
+    script.onload = () => {
+        console.log('✅ Script de huespedes cargado');
+        window.huespedesScriptCargado = true;
+
+        // Intentar inicializar después de cargar
+        if (typeof inicializarHuespedes === 'function') {
+            setTimeout(() => inicializarHuespedes(), 100);
+        }
+    };
+
+    script.onerror = (error) => {
+        console.error('❌ Error cargando script de habitaciones:', error);
+    };
+
     document.head.appendChild(script);
 }
 

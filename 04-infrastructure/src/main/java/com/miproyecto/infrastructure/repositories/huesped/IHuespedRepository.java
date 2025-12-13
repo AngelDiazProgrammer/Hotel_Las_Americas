@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface IHuespedRepository extends JpaRepository<Huesped, Integer> {
 
+    boolean existsByDocumento(String documento);
 
 }
