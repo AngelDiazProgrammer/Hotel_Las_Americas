@@ -50,23 +50,25 @@ public Page<Habitacion> obtenerHabitacionesPaginadas(Pageable pageable) {
     }
     
     public Habitacion guardarHabitacion(Habitacion habitacion) {
-        return habitacionRepository.save(habitacion);
-    }
-    
-    public Habitacion actualizarHabitacion(Integer id, Habitacion habitacionActualizada) {
-        return habitacionRepository.findById(id)
-                .map(habitacionExistente -> {
-                    habitacionExistente.setNumeroHabitacion(habitacionActualizada.getNumeroHabitacion());
-                    habitacionExistente.setTipoHabitacionId(habitacionActualizada.getTipoHabitacionId());
-                    habitacionExistente.setPiso(habitacionActualizada.getPiso());
-                    habitacionExistente.setCapacidad(habitacionActualizada.getCapacidad());
-                    habitacionExistente.setCaracteristicas(habitacionActualizada.getCaracteristicas());
-                    habitacionExistente.setEstadoHabitacionId(habitacionActualizada.getEstadoHabitacionId());
-                    habitacionExistente.setPrecioNoche(habitacionActualizada.getPrecioNoche());
-                    return habitacionRepository.save(habitacionExistente);
-                })
-                .orElseThrow(() -> new RuntimeException("Habitación no encontrada con ID: " + id));
-    }
+    System.out.println("💾 Guardando habitación: " + habitacion.getNumeroHabitacion());
+    Habitacion guardada = habitacionRepository.save(habitacion);
+    System.out.println("✅ Habitación guardada - ID: " + guardada.getId());
+    return guardada;
+}
+
+public Habitacion actualizarHabitacion(Integer id, Habitacion habitacionActualizada) {
+    System.out.println("🔄 Actualizando habitación ID: " + id);
+    return habitacionRepository.findById(id)
+            .map(habitacionExistente -> {
+                System.out.println("📝 Antes: " + habitacionExistente.getNumeroHabitacion());
+                System.out.println("📝 Después: " + habitacionActualizada.getNumeroHabitacion());
+                return habitacionRepository.save(habitacionExistente);
+            })
+            .orElseThrow(() -> {
+                System.out.println("❌ Habitación no encontrada: " + id);
+                return new RuntimeException("Habitación no encontrada con ID: " + id);
+            });
+}
     
     public void eliminarHabitacion(Integer id) {
         habitacionRepository.deleteById(id);
@@ -107,4 +109,23 @@ public Page<Habitacion> obtenerHabitacionesPaginadas(Pageable pageable) {
             total, disponibles, porcentajeDisponibles, total - disponibles
         );
     }
+
+    public Habitacion inhabilitarHabitacion(Integer id) {
+    return habitacionRepository.findById(id)
+            .map(habitacion -> {
+                // Suponiendo que estado 2 = Inhabilitado, 1 = Habilitado
+                habitacion.setEstadoHabitacionId(2);
+                return habitacionRepository.save(habitacion);
+            })
+            .orElseThrow(() -> new RuntimeException("Habitación no encontrada con ID: " + id));
+}
+
+public Habitacion habilitarHabitacion(Integer id) {
+    return habitacionRepository.findById(id)
+            .map(habitacion -> {
+                habitacion.setEstadoHabitacionId(1); // Habilitado
+                return habitacionRepository.save(habitacion);
+            })
+            .orElseThrow(() -> new RuntimeException("Habitación no encontrada con ID: " + id));
+}
 }

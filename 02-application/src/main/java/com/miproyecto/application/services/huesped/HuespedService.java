@@ -4,6 +4,8 @@ import com.miproyecto.domain.entities.huesped.Huesped;
 import com.miproyecto.infrastructure.repositories.huesped.IHuespedRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,8 +25,8 @@ public class HuespedService {
     }
 
     @Transactional(readOnly = true)
-    public List<Huesped> listarHuespedes() {
-        return huespedRepository.findAll();
+    public Page<Huesped> listarHuespedes(Pageable pageable) {
+        return huespedRepository.findAll(pageable);
     }
 
     @Transactional(readOnly = true)

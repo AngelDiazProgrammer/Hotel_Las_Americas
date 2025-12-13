@@ -1,0 +1,638 @@
+/* ===== ESTILOS DE AUTENTICACIÓN - HOTEL LAS AMÉRICAS ===== */
+/* Optimizado para pantallas 1366x768 */
+
+:root {
+    --color-primary: #FF2E2E;
+    --color-primary-dark: #D10000;
+    --color-primary-darker: #750000;
+    --color-primary-light: #FF6B6B;
+    --color-secondary: #2E86FF;
+    --color-background: #F8F9FA;
+    --color-surface: #FFFFFF;
+    --color-text: #333333;
+    --color-text-light: #666666;
+    --color-border: #E0E0E0;
+    --color-success: #2E7D32;
+    --color-error: #D32F2F;
+    --color-warning: #FF9800;
+    --color-info: #0288D1;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 6px 20px rgba(0, 0, 0, 0.10);
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #FFE6E6 0%, #FFF5F5 100%);
+    height: 100vh;
+    min-height: 768px;
+    max-height: 768px;
+    color: var(--color-text);
+    overflow: hidden;
+}
+
+/* ===== LAYOUT PRINCIPAL ===== */
+.login-wrapper {
+    display: flex;
+    height: 100vh;
+    max-height: 768px;
+    width: 100%;
+    max-width: 1366px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* ===== PANEL INFORMATIVO IZQUIERDO ===== */
+.login-info-panel {
+    flex: 0 0 45%;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px 25px;
+    position: relative;
+    overflow: hidden;
+}
+
+.login-info-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+    opacity: 0.2;
+}
+
+.info-content {
+    max-width: 380px;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+.hotel-logo-large {
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.hotel-logo-large i {
+    font-size: 45px;
+    color: white;
+}
+
+.hotel-title-large {
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.hotel-subtitle-large {
+    font-size: 15px;
+    text-align: center;
+    opacity: 0.9;
+    font-weight: 300;
+    margin-bottom: 30px;
+}
+
+.hotel-features {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    margin-bottom: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+
+.feature-item:last-child {
+    margin-bottom: 0;
+}
+
+.feature-item i {
+    margin-right: 12px;
+    font-size: 16px;
+    color: #FFD700;
+}
+
+.hotel-contact {
+    margin-bottom: 25px;
+}
+
+.hotel-contact p {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.hotel-contact p i {
+    margin-right: 10px;
+    font-size: 16px;
+    width: 20px;
+    text-align: center;
+}
+
+.version-display {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.version {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    display: inline-block;
+}
+
+/* ===== PANEL DE FORMULARIO DERECHO ===== */
+.login-form-panel {
+    flex: 0 0 55%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    background: var(--color-background);
+    position: relative;
+}
+
+.form-container {
+    width: 100%;
+    max-width: 420px;
+    background: var(--color-surface);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    padding: 35px;
+    animation: slideInRight 0.5s ease-out;
+}
+
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.form-header {
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.form-header h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-header h2 i {
+    color: var(--color-primary);
+}
+
+.form-subtitle {
+    font-size: 14px;
+    color: var(--color-text-light);
+    font-weight: 300;
+}
+
+/* ===== FORMULARIO ===== */
+.login-form {
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--color-text);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.3px;
+}
+
+.input-with-icon {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-primary);
+    font-size: 18px;
+    z-index: 2;
+}
+
+.form-control {
+    width: 100%;
+    padding: 14px 15px 14px 45px;
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-size: 15px;
+    transition: all 0.3s ease;
+    background-color: #FAFAFA;
+    color: var(--color-text);
+    font-family: inherit;
+    height: 48px;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(255, 46, 46, 0.15);
+    background-color: var(--color-surface);
+}
+
+.form-control::placeholder {
+    color: #AAA;
+    font-size: 14px;
+}
+
+/* ===== OPCIONES DEL FORMULARIO ===== */
+.form-options {
+    margin-bottom: 25px;
+}
+
+.form-check {
+    display: flex;
+    align-items: center;
+}
+
+.form-check-input {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+.form-check-input:checked {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.form-check-label {
+    color: var(--color-text-light);
+    font-size: 14px;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* ===== BOTÓN DE LOGIN ===== */
+.login-button {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(to right, var(--color-primary), var(--color-primary-dark));
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 48px;
+}
+
+.login-button:hover {
+    background: linear-gradient(to right, var(--color-primary-dark), var(--color-primary-darker));
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px rgba(255, 46, 46, 0.2);
+}
+
+.login-button:active {
+    transform: translateY(0);
+}
+
+/* ===== ENLACES ADICIONALES ===== */
+.form-links {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.link-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: rgba(46, 134, 255, 0.05);
+    border-radius: var(--radius-md);
+    color: var(--color-secondary);
+    text-decoration: none;
+    font-size: 13px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(46, 134, 255, 0.1);
+    flex: 1;
+    justify-content: center;
+    text-align: center;
+}
+
+.link-item:hover {
+    background-color: rgba(46, 134, 255, 0.1);
+    border-color: rgba(46, 134, 255, 0.2);
+    text-decoration: none;
+}
+
+.link-item i {
+    margin-right: 8px;
+    font-size: 14px;
+}
+
+/* ===== MENSAJES ===== */
+.error-message {
+    background-color: rgba(211, 47, 47, 0.1);
+    color: var(--color-error);
+    padding: 12px 15px;
+    border-radius: var(--radius-md);
+    margin-bottom: 20px;
+    border-left: 3px solid var(--color-error);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: slideIn 0.3s ease-out;
+    font-size: 14px;
+}
+
+.success-message {
+    background-color: rgba(46, 125, 50, 0.1);
+    color: var(--color-success);
+    padding: 12px 15px;
+    border-radius: var(--radius-md);
+    margin-bottom: 20px;
+    border-left: 3px solid var(--color-success);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    animation: slideIn 0.3s ease-out;
+    font-size: 14px;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.error-message i,
+.success-message i {
+    font-size: 16px;
+}
+
+/* ===== FOOTER DEL FORMULARIO ===== */
+.form-footer {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-border);
+    color: var(--color-text-light);
+    font-size: 13px;
+}
+
+.form-footer p {
+    margin-bottom: 5px;
+}
+
+.disclaimer {
+    font-size: 12px;
+    color: #999;
+    font-style: italic;
+}
+
+/* ===== PARTÍCULAS EN EL FONDO ===== */
+.bg-particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    background: var(--color-primary);
+    border-radius: 50%;
+    opacity: 0.1;
+    animation: float 15s infinite ease-in-out;
+}
+
+@keyframes float {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(10px, -20px) rotate(180deg); }
+}
+
+/* ===== ANIMACIÓN DE CARGA ===== */
+.loading {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Pantallas más pequeñas que 1366px */
+@media (max-width: 1366px) {
+    .login-wrapper {
+        max-width: 100%;
+        padding: 10px;
+    }
+    
+    .form-container {
+        padding: 30px;
+    }
+    
+    .hotel-title-large {
+        font-size: 26px;
+    }
+}
+
+/* Tablets y pantallas medianas */
+@media (max-width: 1024px) {
+    body {
+        min-height: auto;
+        max-height: none;
+        overflow: auto;
+    }
+    
+    .login-wrapper {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+        max-height: none;
+        padding: 0;
+    }
+    
+    .login-info-panel,
+    .login-form-panel {
+        flex: 0 0 auto;
+        min-height: auto;
+    }
+    
+    .login-info-panel {
+        padding: 30px 20px;
+    }
+    
+    .login-form-panel {
+        padding: 30px 20px;
+        min-height: 60vh;
+    }
+    
+    .form-container {
+        max-width: 500px;
+        padding: 30px;
+    }
+}
+
+/* Tablets en vertical */
+@media (max-width: 768px) {
+    .login-info-panel {
+        padding: 25px 20px;
+    }
+    
+    .hotel-logo-large {
+        width: 90px;
+        height: 90px;
+    }
+    
+    .hotel-logo-large i {
+        font-size: 40px;
+    }
+    
+    .hotel-title-large {
+        font-size: 24px;
+    }
+    
+    .form-container {
+        padding: 25px;
+    }
+    
+    .form-header h2 {
+        font-size: 22px;
+    }
+    
+    .form-links {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+/* Móviles */
+@media (max-width: 480px) {
+    .login-info-panel {
+        padding: 20px 15px;
+    }
+    
+    .hotel-logo-large {
+        width: 80px;
+        height: 80px;
+        border-width: 4px;
+    }
+    
+    .hotel-logo-large i {
+        font-size: 35px;
+    }
+    
+    .hotel-title-large {
+        font-size: 22px;
+    }
+    
+    .hotel-subtitle-large {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+    
+    .hotel-features {
+        padding: 15px;
+    }
+    
+    .feature-item {
+        font-size: 13px;
+    }
+    
+    .form-container {
+        padding: 20px;
+        border-radius: var(--radius-lg);
+    }
+    
+    .form-header h2 {
+        font-size: 20px;
+    }
+    
+    .form-subtitle {
+        font-size: 13px;
+    }
+    
+    .form-control {
+        padding: 12px 12px 12px 40px;
+        font-size: 14px;
+        height: 44px;
+    }
+    
+    .input-icon {
+        font-size: 16px;
+        left: 12px;
+    }
+    
+    .login-button {
+        padding: 12px;
+        font-size: 15px;
+        height: 44px;
+    }
+}

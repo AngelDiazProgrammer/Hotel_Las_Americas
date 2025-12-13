@@ -1,0 +1,53 @@
+<div th:fragment="fragmento" id="dashboard-container">
+    <div class="container-fluid py-4">
+        <h1 class="display-5 fw-bold mb-4">📊 Dashboard</h1>
+        
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card border-primary">
+                    <div class="card-body text-center">
+                        <h3><i class="fas fa-bed text-primary"></i></h3>
+                        <h5 class="card-title">Total Habitaciones</h5>
+                        <p class="card-text display-6" th:text="${totalHabitaciones != null ? totalHabitaciones : habitacionService.contarHabitaciones()}">0</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card border-success">
+                    <div class="card-body text-center">
+                        <h3><i class="fas fa-check-circle text-success"></i></h3>
+                        <h5 class="card-title">Disponibles</h5>
+                        <p class="card-text display-6" th:text="${habitacionService.contarHabitacionesDisponibles()}">0</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card border-info">
+                    <div class="card-body text-center">
+                        <h3><i class="fas fa-chart-line text-info"></i></h3>
+                        <h5 class="card-title">Estadísticas</h5>
+                        <p class="card-text" th:text="${habitacionService.obtenerEstadisticas()}">Sin datos</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Bienvenido al Sistema SPA</h5>
+                    </div>
+                    <div class="card-body">
+                        <p>Este es un sistema de una sola página (SPA) donde los componentes se cargan dinámicamente.</p>
+                        <p class="mb-0">✅ Navegación sin recargar la página completa</p>
+                        <p class="mb-0">✅ Experiencia de usuario mejorada</p>
+                        <p class="mb-0">✅ Carga rápida de componentes</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,286 @@
+
+<div th:fragment="vistaHabitaciones" id="habitaciones-container">
+
+    <!-- Mensajes Flash -->
+    <div th:if="${success}" class="alert alert-success alert-dismissible fade show" role="alert">
+        <span th:text="${success}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+
+    <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <span th:text="${error}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+
+    <!-- Header con Botón Agregar -->
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+        <h1>🏨 Gestión de Habitaciones</h1>
+        <div class="d-flex align-items-center gap-2">
+            <span class="badge bg-primary">
+                Total: <span th:text="${totalHabitaciones}">0</span> habitaciones
+            </span>
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalCrear">
+                <i class="fas fa-plus me-1"></i> Nueva Habitación
+            </button>
+        </div>
+    </div>
+
+    <!-- Tabla -->
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">
+                <i class="fas fa-bed me-2"></i>
+                Lista de Habitaciones
+            </h5>
+            <small id="estadisticas" class="fst-italic"></small>
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Número</th>
+                        <th>Piso</th>
+                        <th>Tipo</th>
+                        <th>Capacidad</th>
+                        <th>Precio/Noche</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="hab, stat : ${habitaciones}">
+                        <td th:text="${paginaActual * 10 + stat.index + 1}">1</td>
+                        <td><strong th:text="${hab.numeroHabitacion}"></strong></td>
+                        <td>
+                            <span class="badge bg-secondary" th:text="${hab.piso}"></span>
+                        </td>
+                        <td>
+                            <span class="badge bg-info" th:text="${hab.tipoHabitacionId}"></span>
+                        </td>
+                        <td>
+                            <span class="badge bg-info" th:text="${hab.capacidad} + ' pers.'"></span>
+                        </td>
+                        <td>
+                            <strong class="text-success"
+                                    th:text="'$' + ${#numbers.formatDecimal(hab.precioNoche, 0, 'COMMA', 0, 'POINT')}">
+                            </strong>
+                        </td>
+                        <td>
+                                <span th:if="${hab.estadoHabitacionId == 1}"
+                                      class="badge bg-success">Habilitada</span>
+                            <span th:if="${hab.estadoHabitacionId == 2}"
+                                  class="badge bg-danger">Inhabilitada</span>
+                            <span th:if="${hab.estadoHabitacionId == null or hab.estadoHabitacionId == 0}"
+                                  class="badge bg-warning">Sin Estado</span>
+                        </td>
+                        <td>
+                            <div class="btn-group btn-group-sm">
+                                <button class="btn btn-outline-primary btn-editar"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#modalEditar"
+                                        th:data-id="${hab.id}">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button th:if="${hab.estadoHabitacionId == 1}"
+                                        class="btn btn-outline-danger btn-inhabilitar"
+                                        th:data-id="${hab.id}">
+                                    <i class="fas fa-ban"></i>
+                                </button>
+                                <button th:if="${hab.estadoHabitacionId == 2}"
+                                        class="btn btn-outline-success btn-habilitar"
+                                        th:data-id="${hab.id}">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                                <button class="btn btn-outline-info btn-ver"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#modalVer"
+                                        th:data-id="${hab.id}">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Vacío -->
+            <div th:if="${habitaciones.size() == 0}" class="text-center py-4">
+                <i class="fas fa-bed fa-3x text-muted mb-3"></i>
+                <h5 class="text-muted">No hay habitaciones registradas</h5>
+                <p class="text-muted">Agrega algunas habitaciones para comenzar.</p>
+            </div>
+
+            <!-- Paginación -->
+            <nav th:if="${totalPaginas > 1}" class="mt-3">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item" th:classappend="${paginaActual == 0} ? 'disabled'">
+                        <a class="page-link" href="javascript:void(0);"
+                           th:onclick="'cargarComponenteConPagina(\'habitaciones\', ' + (${paginaActual} - 1) + ')'">
+                            Anterior
+                        </a>
+                    </li>
+
+                    <li class="page-item"
+                        th:each="i : ${#numbers.sequence(0, totalPaginas - 1)}"
+                        th:classappend="${i == paginaActual} ? 'active'">
+                        <a class="page-link" href="javascript:void(0);"
+                           th:text="${i + 1}"
+                           th:onclick="'cargarComponenteConPagina(\'habitaciones\', ' + ${i} + ')'">
+                        </a>
+                    </li>
+
+                    <li class="page-item" th:classappend="${paginaActual + 1 == totalPaginas} ? 'disabled'">
+                        <a class="page-link" href="javascript:void(0);"
+                           th:onclick="'cargarComponenteConPagina(\'habitaciones\', ' + (${paginaActual} + 1) + ')'">
+                            Siguiente
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- ========== MODALES ========== -->
+
+    <!-- Modal Crear -->
+    <div class="modal fade" id="modalCrear" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title">
+                        <i class="fas fa-plus-circle me-2"></i>Nueva Habitación
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- CAMBIO 1: Quitar th:action y th:object, usar onsubmit -->
+                <form id="formCrear" onsubmit="event.preventDefault(); crearHabitacionAJAX(this);">
+                    <div class="modal-body">
+                        <!-- CAMBIO 2: Agregar contenedor para mensajes -->
+                        <div id="mensajeCrear" class="alert" style="display:none;"></div>
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Número de Habitación *</label>
+                                <!-- CAMBIO 3: Usar name en lugar de th:field -->
+                                <input type="text" class="form-control"
+                                       name="numeroHabitacion" required
+                                       placeholder="Ej: 101, 202-A">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Tipo de Habitación *</label>
+                                <!-- CAMBIO 4: Usar name en lugar de th:field -->
+                                <select class="form-select" name="tipoHabitacionId" required>
+                                    <option value="">Seleccione un tipo</option>
+                                    <option value="1">Sencilla</option>
+                                    <option value="2">Doble</option>
+                                    <option value="3">Suite</option>
+                                    <option value="4">Familiar</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Piso</label>
+                                <input type="number" class="form-control"
+                                       name="piso" min="1" max="20"
+                                       placeholder="Ej: 1">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Capacidad *</label>
+                                <input type="number" class="form-control"
+                                       name="capacidad" min="1" max="10" required
+                                       value="2">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Precio por Noche *</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">$</span>
+                                    <input type="number" class="form-control"
+                                           name="precioNoche" step="0.01" min="0" required
+                                           value="100000">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Características</label>
+                                <textarea class="form-control" name="caracteristicas"
+                                          rows="3" placeholder="TV, A/C, WiFi, Jacuzzi, etc."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <!-- CAMBIO 5: Cambiar type="submit" a type="button" y manejar con JS -->
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-success" id="btnCrear">
+                            <span id="btnCrearTexto">Guardar</span>
+                            <span id="btnCrearSpinner" class="spinner-border spinner-border-sm" style="display:none;"></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Editar -->
+    <div class="modal fade" id="modalEditar" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">
+                        <i class="fas fa-edit me-2"></i>Editar Habitación
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- CAMBIO 1: Quitar action, usar onsubmit -->
+                <form id="formEditar" onsubmit="event.preventDefault(); actualizarHabitacionAJAX(this);">
+                    <div class="modal-body" id="contenidoEditar">
+                        <!-- Contenido cargado dinámicamente por JavaScript -->
+                        <div class="text-center py-4">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Cargando...</span>
+                            </div>
+                            <p class="mt-2">Cargando datos de la habitación...</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" id="btnActualizar">
+                            <span id="btnActualizarTexto">Actualizar</span>
+                            <span id="btnActualizarSpinner" class="spinner-border spinner-border-sm" style="display:none;"></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Ver Detalles -->
+    <div class="modal fade" id="modalVer" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title">
+                        <i class="fas fa-eye me-2"></i>Detalles de Habitación
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="contenidoVer">
+                    <!-- Contenido cargado dinámicamente -->
+                    <div class="text-center py-4">
+                        <div class="spinner-border text-info" role="status">
+                            <span class="visually-hidden">Cargando...</span>
+                        </div>
+                        <p class="mt-2">Cargando detalles...</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
