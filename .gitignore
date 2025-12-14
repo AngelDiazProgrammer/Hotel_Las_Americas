@@ -87,3 +87,28 @@ local.properties
 !docker/docker-compose.yml
 !docker/sql-scripts/init.sql
 !docs/
+
+target/
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# VS Code
+.vscode/
+
+# Logs
+*.log
+logs/
+
+# Sistema
+.DS_Store
+Thumbs.db

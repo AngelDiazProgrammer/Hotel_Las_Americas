@@ -1,0 +1,22 @@
+# render.yaml - Colócalo en la raíz (mismo nivel que pom.xml principal)
+services:
+  - type: web
+    name: hotel-las-americas-app
+    env: java
+    region: oregon
+    plan: free
+    buildCommand: ./mvnw clean package -DskipTests
+    startCommand: java -Dserver.port=$PORT -jar 01-presentation/target/*.jar
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: JAVA_OPTS
+        value: -Xmx512m -Xms256m
+    healthCheckPath: /actuator/health
+    autoDeploy: true
+
+  - type: postgres
+    name: hotel-las-americas-db
+    plan: free
+    region: oregon
+    ipAllowList: []
