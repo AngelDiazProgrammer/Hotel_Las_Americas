@@ -7,9 +7,6 @@ export function loadNavbar(containerId) {
         <nav class="navbar">
             <div class="navbar-logo">Hotel Las Américas</div>
             <ul class="navbar-links">
-                <li><a href="#" onclick="cargarComponente('dashboard')" class="active" title="Dashboard">
-                    <span>Dashboard</span>
-                </a></li>
                 <li><a href="#" onclick="cargarComponente('habitaciones')" title="Habitaciones">
                     <span>Habitaciones</span>
                 </a></li>
