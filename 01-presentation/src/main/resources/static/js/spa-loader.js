@@ -153,3 +153,63 @@ export default {
     config: SPA_CONFIG,
     ajustarLayout: ajustarLayoutSPA
 };
+
+// ===============================
+// CARGA DE COMPONENTES SPA
+// ===============================
+window.cargarComponente = async function (componente, page = 0) {
+    console.log(`📦 Cargando componente SPA: ${componente}`);
+
+    const appView = document.getElementById('appView');
+    if (!appView) {
+        console.error('❌ appView no encontrado');
+        return;
+    }
+
+    try {
+        // ===============================
+        // RESERVAS → API JSON
+        // ===============================
+        if (componente === 'reservas') {
+            const response = await fetch(`/vistas/api/reservas?page=${page}`);
+
+            if (!response.ok) {
+                throw response;
+            }
+
+            const result = await response.json();
+
+            if (!result.success) {
+                throw new Error(result.message || 'Error cargando reservas');
+            }
+
+            // Render básico (tabla ya existe en HTML)
+            appView.innerHTML = `
+                <div id="reservas-container"></div>
+            `;
+
+            if (typeof renderReservas === 'function') {
+                renderReservas(result.data);
+            } else {
+                console.error('❌ renderReservas no está definido');
+            }
+
+            return;
+        }
+
+        // ===============================
+        // OTROS COMPONENTES (HTML)
+        // ===============================
+        const response = await fetch(`/vistas/componentes/${componente}`);
+
+        if (!response.ok) {
+            throw response;
+        }
+
+        const html = await response.text();
+        appView.innerHTML = html;
+
+    } catch (error) {
+        handleSPAError(error, `Cargar ${componente}`);
+    }
+};

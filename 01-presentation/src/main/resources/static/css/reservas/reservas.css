@@ -1,0 +1,113 @@
+/*
+ * Estos estilos deben ser agregados a tu archivo CSS principal (donde tienes los estilos de huespedes.css).
+ * Asumimos que las variables de color y los estilos generales de tabla ya están definidos,
+ * pero incluimos la definición de contenedores específicos aquí.
+*/
+
+/* ===== CONTENEDOR ESPECÍFICO DE RESERVAS ===== */
+#reservas-container {
+    width: 100%;
+    padding: 1rem 1rem 3rem 1rem;
+    background: var(--color-soft); /* Fondo rosa suave */
+    overflow: hidden;
+}
+
+/* ===== TITULO DE RESERVAS ===== */
+#reservas-container h1 {
+    font-size: clamp(1.4rem, 2.8vw, 2rem);
+    color: var(--color-main); /* Rojo principal */
+}
+#reservas-container h1 i {
+    color: var(--color-darker); /* Rojo muy oscuro para el ícono */
+}
+
+/* ===== BADGE PRINCIPAL DE RESERVAS (Total) ===== */
+#reservas-container .badge.bg-danger {
+    background-color: var(--color-main) !important;
+    font-size: clamp(0.8rem, 1.2vw, 1rem);
+    padding: 0.5rem 1rem;
+}
+
+/* ===== ENCABEZADO DE TABLA (CARD HEADER) - Rojo Principal ===== */
+#reservas-container .card-header.bg-danger {
+    background: var(--color-main) !important;
+}
+
+/* ===== BADGES DE ESTADO ESPECÍFICOS DE RESERVAS (Ajustados) ===== */
+/* Confirmada (bg-success) */
+.badge.bg-success { background: #198754 !important; }
+/* En Curso (bg-primary) */
+.badge.bg-primary { background: #0d6efd !important; } /* Azul estándar de Bootstrap para diferenciar */
+/* Finalizada (bg-secondary) */
+.badge.bg-secondary { background: var(--color-darker) !important; }
+/* Cancelada (bg-danger) */
+.badge.bg-danger { background: var(--color-dark) !important; } /* Rojo oscuro para Cancelada */
+/* Pendiente (bg-info) */
+.badge.bg-info { background: #0dcaf0 !important; color: #000; }
+
+/* ===== BOTONES DE ACCIÓN (Editar, Ver, Eliminar) ===== */
+/* Botón Editar (outline-primary) -> Rojo Oscuro */
+.btn-outline-primary {
+    color: var(--color-dark);
+    border-color: var(--color-dark);
+}
+.btn-outline-primary:hover {
+    background: var(--color-dark);
+    color: white;
+}
+
+/* Botón Ver (outline-info) -> Rojo Muy Oscuro */
+.btn-outline-info {
+    color: var(--color-darker);
+    border-color: var(--color-darker);
+}
+.btn-outline-info:hover {
+    background: var(--color-darker);
+    color: white;
+}
+
+/* Botón Eliminar (outline-danger) -> Rojo Principal */
+.btn-outline-danger {
+    color: var(--color-main);
+    border-color: var(--color-main);
+}
+.btn-outline-danger:hover {
+    background: var(--color-main);
+    color: white;
+}
+
+/* ===== ENCABEZADOS DE MODALES (Alineación con el diseño de Huéspedes) ===== */
+/* Modal Crear (Rojo Oscuro) */
+.modal-header.bg-dark { background: var(--color-dark) !important; } 
+/* Modal Editar (Rojo Principal) */
+.modal-header.bg-primary { background: var(--color-main) !important; } 
+/* Modal Ver (Rojo Muy Oscuro) */
+.modal-header.bg-info { background: var(--color-darker) !important; } 
+
+
+/* Estilos Responsivos para el botón flotante en móviles (similar a Huéspedes) */
+@media (max-width: 576px) {
+    #reservas-container .btn-success {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    #reservas-container .btn-success i {
+        font-size: 1.5rem;
+        margin: 0;
+    }
+
+    #reservas-container .btn-success span {
+        display: none;
+    }
+}

@@ -8,21 +8,25 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @ComponentScan(basePackages = {
-    "com.miproyecto.presentation",
-    "com.miproyecto.application", 
-    "com.miproyecto.domain",
-    "com.miproyecto.infrastructure",
-    "com.miproyecto.shared"
+        "com.miproyecto.presentation",
+        "com.miproyecto.application",
+        "com.miproyecto.domain",
+        "com.miproyecto.infrastructure",
+        "com.miproyecto.shared"
 })
 // Agrega BOTH paquetes de repositorios
 @EnableJpaRepositories(basePackages = {
-    "com.miproyecto.infrastructure.repositories.habitacion",
-    "com.miproyecto.infrastructure.repositories.usuario"
+        "com.miproyecto.infrastructure.repositories.habitacion",
+        "com.miproyecto.infrastructure.repositories.usuario",
+        "com.miproyecto.infrastructure.repositories.huesped",
+        "com.miproyecto.infrastructure.repositories.reserva"
 })
 // Agrega BOTH paquetes de entidades
 @EntityScan(basePackages = {
-    "com.miproyecto.domain.entities.habitacion",
-    "com.miproyecto.domain.entities.usuario"
+        "com.miproyecto.domain.entities.habitacion",
+        "com.miproyecto.domain.entities.usuario",
+        "com.miproyecto.domain.entities.huesped",
+        "com.miproyecto.domain.entities.reserva"
 })
 public class HotelApplication {
     public static void main(String[] args) {

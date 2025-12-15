@@ -1,0 +1,207 @@
+/* ===== PALETA DE COLORES ===== */
+:root {
+    --color-soft: #FFE6E6;
+    --color-main: #FF2E2E;
+    --color-dark: #D10000;
+    --color-darker: #750000;
+    --color-text: #222;
+}
+
+/* ===== CONTENEDOR PRINCIPAL ===== */
+#huespedes-container {
+    width: 100%;
+    padding: 1rem 1rem 3rem 1rem;
+    background: var(--color-soft);
+    overflow: hidden;
+}
+
+/* ===== TITULO Y BADGE ===== */
+#huespedes-container h1 {
+    font-size: clamp(1.4rem, 2.8vw, 2rem);
+    color: var(--color-darker);
+}
+
+#huespedes-container .badge {
+    background-color: var(--color-main) !important;
+    font-size: clamp(0.8rem, 1.2vw, 1rem);
+    padding: 0.5rem 1rem;
+}
+
+/* ===== TARJETA PRINCIPAL ===== */
+.card {
+    border: none;
+    border-radius: 12px;
+}
+
+.card-header {
+    background: var(--color-main) !important;
+    border-radius: 12px 12px 0 0;
+}
+
+.card-header h5 {
+    font-size: clamp(1rem, 1.8vw, 1.3rem);
+}
+
+/* ===== TABLA RESPONSIVA ===== */
+.table-responsive {
+    max-height: 55vh;     /* Mantener todo en una sola pantalla */
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+.table th,
+.table td {
+    white-space: nowrap;
+    font-size: clamp(0.75rem, 1.1vw, 0.9rem);
+}
+
+/* ===== BOTONES DE ACCION ===== */
+.btn-outline-primary {
+    color: var(--color-dark);
+    border-color: var(--color-dark);
+}
+.btn-outline-primary:hover {
+    background: var(--color-dark);
+    color: white;
+}
+
+.btn-outline-info {
+    color: var(--color-darker);
+    border-color: var(--color-darker);
+}
+.btn-outline-info:hover {
+    background: var(--color-darker);
+    color: white;
+}
+
+/* ===== PAGINACIÓN ===== */
+.pagination .page-link {
+    font-size: clamp(0.75rem, 1vw, 0.9rem);
+    color: var(--color-dark);
+}
+
+.pagination .page-item.active .page-link {
+    background: var(--color-main);
+    border-color: var(--color-main);
+    color: white;
+}
+
+/* ===== TARJETAS DE ESTADISTICAS ===== */
+.row.mt-4 .card {
+    border-radius: 14px;
+    text-align: center;
+}
+
+.row.mt-4 .card-body h3 {
+    font-size: clamp(1rem, 2vw, 1.6rem);
+}
+
+/* ===== COLORES DE ESTADISTICAS PERSONALIZADOS ===== */
+.bg-success {
+    background: var(--color-dark) !important;
+}
+.bg-warning {
+    background: #FF8A00 !important;
+}
+.bg-danger {
+    background: var(--color-main) !important;
+}
+.bg-secondary {
+    background: var(--color-darker) !important;
+}
+
+/* ===== MOBIL — OPTIMIZACIÓN TOTAL ===== */
+@media (max-width: 768px) {
+
+    #habitaciones-container {
+        padding: 0.7rem;
+    }
+
+    .d-flex.justify-content-between {
+        flex-direction: column;
+        gap: 0.8rem;
+        text-align: center;
+    }
+
+    .table-responsive {
+        max-height: 45vh;
+    }
+
+    .row.mt-4 .col-md-3 {
+        margin-bottom: 1rem;
+    }
+}
+
+/* Estilos adicionales para habitaciones.css */
+
+/* Botones de acciones */
+.btn-group-sm .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+}
+
+/* Badges de estado */
+.badge.bg-success { background: #198754 !important; }
+.badge.bg-danger { background: #dc3545 !important; }
+.badge.bg-warning { background: #ffc107 !important; color: #000; }
+
+/* Hover en filas de tabla */
+.table-hover tbody tr:hover {
+    background-color: rgba(255, 46, 46, 0.05) !important;
+}
+
+/* Modal headers */
+.modal-header.bg-success { background: var(--color-dark) !important; }
+.modal-header.bg-primary { background: var(--color-main) !important; }
+.modal-header.bg-info { background: var(--color-darker) !important; }
+
+/* Formularios en modales */
+.modal-body .form-label {
+    font-weight: 600;
+    color: var(--color-darker);
+}
+
+.modal-body .form-control:focus,
+.modal-body .form-select:focus {
+    border-color: var(--color-main);
+    box-shadow: 0 0 0 0.25rem rgba(255, 46, 46, 0.25);
+}
+
+/* Responsividad para modales */
+@media (max-width: 768px) {
+    .modal-dialog.modal-lg {
+        margin: 0.5rem;
+        max-width: calc(100% - 1rem);
+    }
+
+    .modal-body .row.g-3 {
+        gap: 0.5rem !important;
+    }
+}
+
+/* Botón flotante para móviles */
+@media (max-width: 576px) {
+    #huespedes-container .btn-success {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    #huespedes-container .btn-success i {
+        font-size: 1.5rem;
+        margin: 0;
+    }
+
+    #huespedes-container .btn-success span {
+        display: none;
+    }
+}

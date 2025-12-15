@@ -1,7 +1,9 @@
 package com.miproyecto.presentation.controllers;
 
 import com.miproyecto.application.services.habitacion.HabitacionService;
+import com.miproyecto.application.services.huesped.HuespedService;
 import com.miproyecto.domain.entities.habitacion.Habitacion;
+import com.miproyecto.domain.entities.huesped.Huesped;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,6 +21,9 @@ public class IndexController {
 
     @Autowired
     private HabitacionService habitacionService;
+
+    @Autowired
+    private HuespedService huespedService;
 
     @GetMapping("/")
     public String index(Model model, HttpSession session) {
@@ -97,6 +102,21 @@ public class IndexController {
                 model.addAttribute("totalPaginas", paginaHabitaciones.getTotalPages());
                 model.addAttribute("paginaActual", page);
                 model.addAttribute("nuevaHabitacion", new Habitacion());
+                break;
+
+            case "huespedes":
+                System.out.println("🏨 Cargando componente de habitaciones...");
+                model.addAttribute("componente", "huespedes");
+
+                // Cargar datos para habitaciones
+                Pageable pageableHuesped = PageRequest.of(page, size);
+                Page<Huesped> paginaHuespedes = huespedService.listarHuespedes(pageableHuesped);
+
+                model.addAttribute("huespedes", paginaHuespedes.getContent());
+                model.addAttribute("totalHuesped", paginaHuespedes.getTotalElements());
+                model.addAttribute("totalPaginas", paginaHuespedes.getTotalPages());
+                model.addAttribute("paginaActual", page);
+                model.addAttribute("nuevoHuesped", new Huesped());
                 break;
                 
             default:
