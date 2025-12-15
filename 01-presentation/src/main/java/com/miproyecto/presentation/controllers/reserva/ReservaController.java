@@ -3,6 +3,9 @@ package com.miproyecto.presentation.controllers.reserva;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.miproyecto.application.services.reserva.ReservaService;
 import com.miproyecto.domain.entities.reserva.Reserva;
+import com.miproyecto.infrastructure.repositories.habitacion.IHabitacionRepository;
+import com.miproyecto.infrastructure.repositories.huesped.IHuespedRepository;
+import com.miproyecto.infrastructure.repositories.reserva.EstadoReservaRepository;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -12,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -24,15 +28,11 @@ import java.util.HashMap;
 @RequiredArgsConstructor
 public class ReservaController {
 
-    private final ReservaService reservaService; 
-    
-    // =======================================================
-    // MÉTODOS AJAX/REST PARA EL COMPONENTE SPA (JSON)
-    // =======================================================
+    private final ReservaService reservaService;
+    private final IHuespedRepository huespedRepository;
+    private final IHabitacionRepository habitacionRepository;
+    private final EstadoReservaRepository estadoReservaRepository;
 
-    /**
-     * Endpoint para cargar el componente de reservas en SPA (HTML/Thymeleaf Fragment)
-     */
     @GetMapping("/componentes/reservas")
     public String componenteReserva(
             Model model,
@@ -49,6 +49,11 @@ public class ReservaController {
         model.addAttribute("totalPaginas", paginaReserva.getTotalPages());
         model.addAttribute("paginaActual", page);
         model.addAttribute("nuevaReserva", new Reserva());
+
+        model.addAttribute("listaHuespedes", huespedRepository.findAll());
+        model.addAttribute("listaHabitaciones", habitacionRepository.findAll());
+        model.addAttribute("listaEstadosReserva", estadoReservaRepository.findAll());
+
 
         System.out.println("✅ Componente reserva listo: " + paginaReserva.getTotalElements() + " reservas");
 
@@ -79,29 +84,31 @@ public class ReservaController {
         }
     }
 
-    /**
-     * Crear reserva vía AJAX
-     */
+// Archivo: ReservaController.java (Método POST)
+
+    // 🚨 CAMBIO CLAVE: Cambiar @RequestBody por @ModelAttribute
     @PostMapping("/api/reservas")
-    @ResponseBody
-    public ResponseEntity<ApiResponse<Reserva>> crearReservaAjax(@RequestBody Reserva reserva) {
-        System.out.println("📝 POST /api/reservas - Creando vía AJAX");
+    public String crearReserva(
+            @ModelAttribute("nuevaReserva") Reserva reserva, // ⬅️ Recibe los datos del formulario tradicional
+            BindingResult result,
+            RedirectAttributes redirectAttributes
+    ) {
+        System.out.println("📝 POST /api/reservas - Creando vía Formulario");
+
+        // NOTA: Elimina @ResponseBody y el return de ResponseEntity si usas este método
+        // y deseas redireccionar a una vista.
+
+        // ... (Tu lógica de validación aquí) ...
 
         try {
-            Reserva reservaGuardada = reservaService.guardarReserva(reserva);
-
-            // CORRECCIÓN: Usar getId()
-            System.out.println("✅ Reserva creada: ID: " + reservaGuardada.getIdReserva());
-            return ResponseEntity.ok(new ApiResponse<>(
-                    true,
-                    "Reserva creada exitosamente",
-                    reservaGuardada
-            ));
+            reservaService.guardarReserva(reserva);
+            redirectAttributes.addFlashAttribute("success", "Reserva creada exitosamente.");
+            return "redirect:/vistas/componentes/reservas"; // Redireccionar al componente de la tabla
 
         } catch (Exception e) {
             System.out.println("❌ Error al crear reserva: " + e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ApiResponse<>(false, "Error: " + e.getMessage(), null));
+            redirectAttributes.addFlashAttribute("error", "Error al guardar: " + e.getMessage());
+            return "redirect:/vistas/componentes/reservas"; // Redireccionar con error
         }
     }
 

@@ -241,39 +241,40 @@
         </div>
     </div>
 
-        <!-- Modal Editar -->
-        <div class="modal fade" id="modalEditar" tabindex="-1">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header bg-primary text-white">
-                        <h5 class="modal-title">
-                            <i class="fas fa-edit me-2"></i>Editar Huesped
-                        </h5>
-                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                    </div>
-
-                    <!-- CAMBIO 1: Quitar action, usar onsubmit -->
-                    <form id="formEditar" onsubmit="event.preventDefault(); actualizarHuespedAJAX(this);">
-                        <div class="modal-body" id="contenidoEditar">
-                            <!-- Contenido cargado dinámicamente por JavaScript -->
-                            <div class="text-center py-4">
-                                <div class="spinner-border text-primary" role="status">
-                                    <span class="visually-hidden">Cargando...</span>
-                                </div>
-                                <p class="mt-2">Cargando datos del huesped...</p>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary" id="btnActualizar">
-                                <span id="btnActualizarTexto">Actualizar</span>
-                                <span id="btnActualizarSpinner" class="spinner-border spinner-border-sm" style="display:none;"></span>
-                            </button>
-                        </div>
-                    </form>
+    <!-- Modal Editar -->
+    <div class="modal fade" id="modalEditar" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">
+                        <i class="fas fa-edit me-2"></i>Editar Huesped
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
+
+                <!-- CAMBIO 1: Quitar action, usar onsubmit -->
+                <form id="formEditar" onsubmit="event.preventDefault(); actualizarHuespedAJAX(this);">
+                    <div class="modal-body" id="contenidoEditar">
+                        <!-- Contenido cargado dinámicamente por JavaScript -->
+                        <div class="text-center py-4">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Cargando...</span>
+                            </div>
+                            <p class="mt-2">Cargando datos del huesped...</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" id="btnActualizar">
+                            <span id="btnActualizarTexto">Actualizar</span>
+                            <span id="btnActualizarSpinner" class="spinner-border spinner-border-sm"
+                                  style="display:none;"></span>
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
+    </div>
 
     <!-- Modal Ver Detalles -->
     <div class="modal fade" id="modalVer" tabindex="-1">

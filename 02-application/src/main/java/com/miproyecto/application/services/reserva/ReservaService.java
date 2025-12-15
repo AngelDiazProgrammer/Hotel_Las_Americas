@@ -74,7 +74,6 @@ public class ReservaService {
 
     @Transactional
     public Reserva editarReserva(Integer id, Reserva reservaActualizada) {
-        // ...
         return reservaRepository.findById(id)
                 .map(reservaExistente -> {
 
@@ -93,8 +92,6 @@ public class ReservaService {
                                         + reservaActualizada.getHabitacion().getId()));
                         reservaExistente.setHabitacion(nuevaHabitacion);
                     }
-
-                    // ... el resto de la lógica de edición
 
                     return reservaRepository.save(reservaExistente);
                 })

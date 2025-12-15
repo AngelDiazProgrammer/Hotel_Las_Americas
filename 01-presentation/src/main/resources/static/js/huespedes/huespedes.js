@@ -1,12 +1,8 @@
-// huespedes.js - Versión SPA con API endpoints
 console.log('🏨 huespedes.js - Inicializando módulo SPA');
 
-// Variables de estado
 let huespedesConfigurado = false;
 let currentPage = 0;
 const pageSize = 10;
-
-// ===== FUNCIÓN PRINCIPAL DE INICIALIZACIÓN =====
 
 function inicializarHuespedes() {
     if (huespedesConfigurado) {
@@ -25,8 +21,6 @@ function inicializarHuespedes() {
     huespedesConfigurado = true;
     console.log('✅ Módulo de huespedes inicializado');
 }
-
-// ===== CONFIGURACIÓN DE EVENT LISTENERS =====
 
 function configurarEventListeners() {
     console.log('🔧 Configurando event listeners...');
@@ -93,8 +87,6 @@ function configurarFormulariosAJAX() {
 
     console.log('✅ Formularios AJAX configurados');
 }
-
-// ===== FUNCIONES PARA CRUD CON API =====
 
 async function crearHuespedAJAX(form) {
     console.log('🆕 Iniciando creación de huesped...');
@@ -521,9 +513,6 @@ function mostrarMensajeModal(mensaje, tipo, contenedor) {
     }
 }
 
-// ===== EXPOSICIÓN GLOBAL DE FUNCIONES =====
-
-// Hacer funciones disponibles globalmente
 window.inicializarHuespedes = inicializarHuespedes;
 window.cargarHuespedParaEditar = cargarHuespedParaEditar;
 window.cargarDetallesHuesped = cargarDetallesHuesped;
@@ -531,10 +520,8 @@ window.crearHuespedAJAX = crearHuespedAJAX;
 window.actualizarHuespedAJAX = actualizarHuespedAJAX;
 window.mostrarMensajeModal = mostrarMensajeModal;
 
-// Inicializar cuando el script se cargue
 console.log('✅ huespedes.js cargado - Módulo listo');
 
-// Si estamos en el contexto de huespedes, inicializar automáticamente
 if (document.getElementById('huespedes-container')) {
     console.log('🔍 Detectado contenedor de huespedes - Inicializando...');
     setTimeout(() => {
@@ -544,7 +531,6 @@ if (document.getElementById('huespedes-container')) {
     }, 300);
 }
 
-// Exportar para módulos (si es necesario)
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
         inicializarHuespedes,
