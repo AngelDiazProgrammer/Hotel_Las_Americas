@@ -272,7 +272,7 @@ function cargarScriptReservas() {
 
     // Crear script element
     const script = document.createElement('script');
-    script.src = '/js/reservas.js';
+    script.src = '/js/reservas/reservas.js';
     script.onload = () => {
         // CORRECCIÓN: El console.log decía "huespedes" en tu código original.
         console.log('✅ Script de reservas cargado'); 
