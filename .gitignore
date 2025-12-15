@@ -1,3 +1,7 @@
+#Properties
+*application-prod.properties
+*application.properties
+
 # Maven
 target/
 **/target/
