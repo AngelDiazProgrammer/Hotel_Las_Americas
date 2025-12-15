@@ -198,3 +198,4 @@ INSERT INTO usuarios (nombre_usuario, contrasena, nombres, apellidos, email, id_
 ('ema', '$2a$12$VFnHigzjeYomhCrOHjmwxuLT9.RcD5.A4OrZy8mNh0zQcCf5XB1dy', 'Ema', 'Rodriguez', 'ema@hotelamericas.com', 2),
 ('angel', '$2a$12$VFnHigzjeYomhCrOHjmwxuLT9.RcD5.A4OrZy8mNh0zQcCf5XB1dy', 'Angel', 'Lopez', 'angel@hotelamericas.com', 2),
 ('daniel', '$2a$12$VFnHigzjeYomhCrOHjmwxuLT9.RcD5.A4OrZy8mNh0zQcCf5XB1dy', 'Daniel', 'Perez', 'daniel@hotelamericas.com', 3);
+('Administrador', 'Admin123', 'Administrador', 'Hotel', 'administrador@hotelamericas.com', 3);
