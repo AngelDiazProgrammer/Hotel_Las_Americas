@@ -1,10 +1,17 @@
 package com.miproyecto.domain.entities.habitacion;
 
 import jakarta.persistence.*;
+import lombok.*;
+
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "habitaciones")
+@Getter
+@Setter
+@RequiredArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Habitacion {
     
     @Id
@@ -30,45 +37,10 @@ public class Habitacion {
     
     @Column(name = "precio_noche", nullable = false)
     private BigDecimal precioNoche;
-    
-    // Constructores
-    public Habitacion() {}
-    
-    public Habitacion(String numeroHabitacion, Integer tipoHabitacionId, Integer capacidad, BigDecimal precioNoche) {
-        this.numeroHabitacion = numeroHabitacion;
-        this.tipoHabitacionId = tipoHabitacionId;
-        this.capacidad = capacidad;
-        this.precioNoche = precioNoche;
-    }
-    
-    // Getters y Setters
-    public Integer getId() { return id; }
-    public void setId(Integer id) { this.id = id; }
-    
-    public String getNumeroHabitacion() { return numeroHabitacion; }
-    public void setNumeroHabitacion(String numeroHabitacion) { this.numeroHabitacion = numeroHabitacion; }
-    
-    public Integer getTipoHabitacionId() { return tipoHabitacionId; }
-    public void setTipoHabitacionId(Integer tipoHabitacionId) { this.tipoHabitacionId = tipoHabitacionId; }
-    
-    public Integer getPiso() { return piso; }
-    public void setPiso(Integer piso) { this.piso = piso; }
-    
-    public Integer getCapacidad() { return capacidad; }
-    public void setCapacidad(Integer capacidad) { this.capacidad = capacidad; }
-    
-    public String getCaracteristicas() { return caracteristicas; }
-    public void setCaracteristicas(String caracteristicas) { this.caracteristicas = caracteristicas; }
-    
-    public Integer getEstadoHabitacionId() { return estadoHabitacionId; }
-    public void setEstadoHabitacionId(Integer estadoHabitacionId) { this.estadoHabitacionId = estadoHabitacionId; }
-    
-    public BigDecimal getPrecioNoche() { return precioNoche; }
-    public void setPrecioNoche(BigDecimal precioNoche) { this.precioNoche = precioNoche; }
-    
-    // Método helper para mostrar info
-    public String getInfoCompleta() {
-        return String.format("Habitación %s - Piso %d - $%,.0f/noche", 
-            numeroHabitacion, piso != null ? piso : 0, precioNoche);
-    }
+
+//    // Método helper para mostrar info
+//    public String getInfoCompleta() {
+//        return String.format("Habitación %s - Piso %d - $%,.0f/noche",
+//            numeroHabitacion, piso != null ? piso : 0, precioNoche);
+//    }
 }
