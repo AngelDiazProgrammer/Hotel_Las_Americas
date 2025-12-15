@@ -16,7 +16,6 @@
     <name>01-presentation</name>
     
     <dependencies>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
@@ -54,6 +53,13 @@
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
+
+
+<dependency>
+    <groupId>org.postgresql</groupId>
+    <artifactId>postgresql</artifactId>
+    <scope>runtime</scope>
+</dependency>
     </dependencies>
     
     <build>
