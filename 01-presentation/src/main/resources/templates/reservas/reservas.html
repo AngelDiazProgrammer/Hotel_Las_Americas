@@ -1,0 +1,233 @@
+<div th:fragment="vistaReservas" id="reservas-container">
+
+    <div id="alert-messages-container" class="mt-2"></div>
+
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
+        <h1>🗓️ Gestión de Reservas</h1>
+        <div class="d-flex align-items-center gap-2">
+            <span class="badge bg-primary">
+                Total: <span th:text="${totalReservas}">0</span> Reservas
+            </span>
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalCrearReserva">
+                <i class="fas fa-plus me-1"></i> Nueva Reserva
+            </button>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Huésped</th>
+                            <th>Habitación</th>
+                            <th>Entrada</th>
+                            <th>Salida</th>
+                            <th>Estado</th>
+                            <th>Total Estimado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="reserva, stat : ${reservas}">
+                            <td th:text="${paginaActual * 10 + stat.index + 1}">1</td>
+                            <td th:text="${reserva.huesped?.nombre + ' ' + reserva.huesped?.apellido ?: 'N/A'}"></td>
+                            <td th:text="${reserva.habitacion?.numeroHabitacion ?: 'N/A'}"></td>
+                            <td th:text="${reserva.fechaEntrada}"></td>
+                            <td th:text="${reserva.fechaSalida}"></td>
+                            <td th:text="${reserva.estadoReserva?.descripcion ?: 'N/A'}"></td>
+                            <td th:text="${reserva.totalEstimado}"></td>
+                            <td>
+                                <div class="d-flex gap-2">
+                                    <button type="button" class="btn btn-sm btn-primary btn-editar-reserva"
+                                        th:data-id="${reserva.idReserva}" data-bs-toggle="modal"
+                                        data-bs-target="#modalEditarReserva" title="Editar Reserva">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-info btn-ver-detalle-reserva"
+                                        th:data-id="${reserva.idReserva}" data-bs-toggle="modal"
+                                        data-bs-target="#modalVerDetalleReserva" title="Ver Detalle">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-sm btn-danger btn-eliminar-reserva"
+                                        th:data-id="${reserva.idReserva}" data-bs-toggle="modal"
+                                        data-bs-target="#modalEliminarReserva" title="Eliminar Reserva">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <nav th:if="${totalPaginas > 1}" class="mt-3">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item" th:classappend="${paginaActual == 0} ? 'disabled'">
+                        <a class="page-link pagination-reservas-link" href="#" th:data-page="${paginaActual} - 1">
+                            Anterior
+                        </a>
+                    </li>
+                    <li class="page-item" th:each="i : ${#numbers.sequence(0, totalPaginas - 1)}"
+                        th:classappend="${i == paginaActual} ? 'active'">
+                        <a class="page-link pagination-reservas-link" href="#" th:text="${i + 1}" th:data-page="${i}">
+                        </a>
+                    </li>
+                    <li class="page-item" th:classappend="${paginaActual + 1 == totalPaginas} ? 'disabled'">
+                        <a class="page-link pagination-reservas-link" href="#" th:data-page="${paginaActual} + 1">
+                            Siguiente
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    
+    <script type="text/javascript" th:inline="javascript">
+        if (typeof inicializarReservas === 'function') {
+            inicializarReservas();
+        }
+    </script>
+    
+    <div class="modal fade" id="modalEditarReserva" tabindex="-1" aria-labelledby="modalEditarReservaLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="modalEditarReservaLabel">✏️ Editar Reserva #<span
+                            id="reserva-id-editar"></span></h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <form id="formEditarReserva" onsubmit="event.preventDefault(); actualizarReservaAJAX(this);">
+                    <div class="modal-body" id="modal-body-editar">
+                        <div class="text-center p-5">Cargando datos...</div>
+                        <div id="mensajeEditarReserva" class="alert mt-3" style="display:none;"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary" id="btnGuardarEdicionReserva">
+                            <span id="btnGuardarEdicionTexto">Guardar Cambios</span>
+                            <span id="btnGuardarEdicionSpinner" class="spinner-border spinner-border-sm"
+                                style="display:none;"></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalVerDetalleReserva" tabindex="-1" aria-labelledby="modalVerDetalleReservaLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title" id="modalVerDetalleReservaLabel">👁️ Detalle de Reserva #<span
+                            id="reserva-id-detalle"></span></h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modal-body-detalle">
+                    <div class="text-center p-5">Cargando datos...</div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="modalEliminarReserva" tabindex="-1">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title">🗑️ Confirmar Eliminación</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="formEliminarReserva" onsubmit="event.preventDefault(); eliminarReservaAJAX(this);">
+                    <input type="hidden" name="idReservaEliminar" id="idReservaEliminar" value="">
+                    <div class="modal-body">
+                        <div id="mensajeEliminarReserva" class="alert" style="display:none;"></div>
+                        <p>¿Está seguro que desea eliminar la reserva **#<span id="reserva-id-eliminar"></span>**?</p>
+                        <p class="text-danger"><small>Esta acción es irreversible.</small></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-danger" id="btnConfirmarEliminacion">
+                            <span id="btnConfirmarTexto">Eliminar</span>
+                            <span id="btnConfirmarSpinner" class="spinner-border spinner-border-sm"
+                                style="display:none;"></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalCrearReserva" tabindex="-1" aria-labelledby="modalCrearReservaLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title" id="modalCrearReservaLabel">➕ Registrar Nueva Reserva</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <form id="formCrearReserva" onsubmit="event.preventDefault(); crearReservaAJAX(this);">
+                    <div class="modal-body">
+                        <div id="mensajeCrearReserva" class="alert mt-3" style="display:none;"></div>
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Huésped (ID o Búsqueda) *</label>
+                                <select class="form-select" name="idHuesped" required>
+                                    <option value="">Seleccionar Huésped (Simulado)</option>
+                                    <option value="1">Carlos Ramírez (ID: 1)</option>
+                                    <option value="2">Ana Gómez (ID: 2)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Habitación *</label>
+                                <select class="form-select" name="idHabitacion" required>
+                                    <option value="">Seleccionar Habitación (Simulada)</option>
+                                    <option value="1">101 - Simple</option>
+                                    <option value="2">102 - Doble</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Fecha Entrada *</label>
+                                <input type="date" class="form-control" name="fechaEntrada" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Fecha Salida *</label>
+                                <input type="date" class="form-control" name="fechaSalida" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Total Estimado *</label>
+                                <input type="number" step="0.01" class="form-control" name="totalEstimado"
+                                    placeholder="Ej: 550.00" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Estado Inicial *</label>
+                                <select class="form-select" name="idEstadoReserva" required>
+                                    <option value="1" selected>Pendiente (Reserva pendiente de check-in)</option>
+                                    <option value="2">Confirmada</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-success" id="btnGuardarNuevaReserva">
+                            <span id="btnCrearTexto">Guardar Reserva</span>
+                            <span id="btnCrearSpinner" class="spinner-border spinner-border-sm"
+                                style="display:none;"></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+</div>
