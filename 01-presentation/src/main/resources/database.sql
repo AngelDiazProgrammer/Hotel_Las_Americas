@@ -193,8 +193,8 @@ INSERT INTO dom_servicios (nombre_servicio, descripcion, precio) VALUES
 ('SPA', 'Spa y masajes', 50.00);
 
 INSERT INTO usuarios (nombre_usuario, contrasena, nombres, apellidos, email, id_rol) VALUES
-('admin', '123456', 'Admin', 'Sistema', 'admin@hotelamericas.com', 1),
-('sara', '123456', 'Sara', 'Martinez', 'sara@hotelamericas.com', 2),
-('ema', '123456', 'Ema', 'Rodriguez', 'ema@hotelamericas.com', 2),
-('angel', '123456', 'Angel', 'Lopez', 'angel@hotelamericas.com', 2),
-('daniel', '123456', 'Daniel', 'Perez', 'daniel@hotelamericas.com', 3);
+('admin', '$2a$12$VFnHigzjeYomhCrOHjmwxuLT9.RcD5.A4OrZy8mNh0zQcCf5XB1dy', 'Admin', 'Sistema', 'admin@hotelamericas.com', 1),
+('sara', '$2a$12$VFnHigzjeYomhCrOHjmwxuLT9.RcD5.A4OrZy8mNh0zQcCf5XB1dy', 'Sara', 'Martinez', 'sara@hotelamericas.com', 2),
+('ema', '$2a$12$VFnHigzjeYomhCrOHjmwxuLT9.RcD5.A4OrZy8mNh0zQcCf5XB1dy', 'Ema', 'Rodriguez', 'ema@hotelamericas.com', 2),
+('angel', '$2a$12$VFnHigzjeYomhCrOHjmwxuLT9.RcD5.A4OrZy8mNh0zQcCf5XB1dy', 'Angel', 'Lopez', 'angel@hotelamericas.com', 2),
+('daniel', '$2a$12$VFnHigzjeYomhCrOHjmwxuLT9.RcD5.A4OrZy8mNh0zQcCf5XB1dy', 'Daniel', 'Perez', 'daniel@hotelamericas.com', 3);
